@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Resources — Coming Soon | William Allen Company</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy:    #0b1e40;
+            --gold:    #ED862D;
+            --sky:     #5dadec;
+            --slate:   #e8eef6;
+            --ivory:   #f6efe6;
+            --charcoal:#4a4a4a;
+            --white:   #ffffff;
+            --bg:      #f2f4f8;
+            --border:  #dde2ea;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body { height: 100%; }
+        body {
+            font-family: 'DM Sans', system-ui, sans-serif;
+            background: var(--navy);
+            color: var(--white);
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            background: rgba(11,30,64,0.97);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(255,200,69,0.15);
+            padding: 0 2rem;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--white); text-decoration: none; letter-spacing: 0.3px; }
+        .nav-logo span { color: var(--gold); }
+        .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+        .nav-links a { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.75); text-decoration: none; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--gold); }
+        .nav-links a.active { color: var(--gold); }
+        .nav-cta { background: var(--gold) !important; color: var(--navy) !important; padding: 8px 20px; border-radius: 8px; font-weight: 600 !important; transition: background 0.2s, transform 0.15s !important; }
+        .nav-cta:hover { background: #e6b43c !important; transform: translateY(-1px); }
+
+        /* ── GRID BACKGROUND ── */
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Radial glow */
+        .bg-glow {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 60%, rgba(93,173,236,0.07) 0%, transparent 65%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Gold right edge accent */
+        .bg-edge {
+            position: fixed;
+            top: 0; right: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--gold), transparent 60%);
+            opacity: 0.5;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ── MAIN CONTENT ── */
+        .main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 7rem 2rem 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content {
+            text-align: center;
+            max-width: 580px;
+            width: 100%;
+        }
+
+        /* Icon */
+        .icon-wrap {
+            width: 80px;
+            height: 80px;
+            background: rgba(255,200,69,0.08);
+            border: 1px solid rgba(255,200,69,0.2);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            animation: fadeUp 0.5s ease both;
+        }
+
+        .icon-wrap svg {
+            width: 36px;
+            height: 36px;
+            stroke: var(--gold);
+            fill: none;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* Eyebrow */
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1.25rem;
+            animation: fadeUp 0.5s 0.05s ease both;
+        }
+
+        .eyebrow::before, .eyebrow::after {
+            content: '';
+            display: block;
+            width: 24px;
+            height: 1.5px;
+            background: var(--gold);
+            border-radius: 1px;
+        }
+
+        /* Heading */
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(36px, 6vw, 58px);
+            font-weight: 800;
+            color: var(--white);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            animation: fadeUp 0.5s 0.1s ease both;
+        }
+
+        h1 .accent { color: var(--gold); }
+
+        /* Description */
+        .desc {
+            font-size: 16px;
+            font-weight: 300;
+            color: rgba(255,255,255,0.55);
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+            animation: fadeUp 0.5s 0.15s ease both;
+        }
+
+        /* What's coming preview */
+        .preview {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+            margin-bottom: 2.5rem;
+            animation: fadeUp 0.5s 0.2s ease both;
+        }
+
+        .preview-item {
+            background: rgba(255,255,255,0.04);
+            border: 0.5px solid rgba(255,255,255,0.08);
+            border-radius: 10px;
+            padding: 1rem 0.75rem;
+            text-align: center;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .preview-item:hover {
+            background: rgba(255,255,255,0.07);
+            border-color: rgba(255,200,69,0.2);
+        }
+
+        .preview-item svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--sky);
+            fill: none;
+            stroke-width: 1.75;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            margin-bottom: 0.5rem;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .preview-item span {
+            font-size: 12px;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.4;
+            display: block;
+        }
+
+        /* Buttons */
+        .actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeUp 0.5s 0.25s ease both;
+        }
+
+        .btn-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            color: var(--white);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 13px 26px;
+            border-radius: 10px;
+            text-decoration: none;
+            border: 1.5px solid rgba(255,255,255,0.2);
+            cursor: pointer;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .btn-home:hover {
+            border-color: rgba(255,255,255,0.5);
+            background: rgba(255,255,255,0.05);
+        }
+
+        .btn-home svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--gold);
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .btn-quote {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--gold);
+            color: var(--navy);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 13px 26px;
+            border-radius: 10px;
+            text-decoration: none;
+            border: 3px solid var(--gold);
+            cursor: pointer;
+            transition: background 0.2s, transform 0.15s;
+        }
+
+        .btn-quote:hover {
+            background: #e6b43c;
+            transform: translateY(-2px);
+        }
+
+        .btn-quote svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--navy);
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* Contact nudge */
+        .contact-nudge {
+            margin-top: 2rem;
+            font-size: 13px;
+            color: rgba(255,255,255,0.3);
+            animation: fadeUp 0.5s 0.3s ease both;
+        }
+
+        .contact-nudge a {
+            color: var(--sky);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .contact-nudge a:hover { color: var(--white); }
+
+        /* ── FOOTER STRIP ── */
+        .footer-strip {
+            position: relative;
+            z-index: 1;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding: 1.25rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .footer-strip p {
+            font-size: 11px;
+            color: rgba(255,255,255,0.25);
+        }
+
+        .footer-strip-social {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .social-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 7px;
+            background: rgba(255,255,255,0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .social-btn:hover { background: rgba(255,255,255,0.12); }
+
+        .social-btn svg {
+            width: 14px;
+            height: 14px;
+            stroke: rgba(255,255,255,0.6);
+            fill: none;
+            stroke-width: 1.75;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 600px) {
+            .preview { grid-template-columns: 1fr 1fr; }
+            .nav-links { display: none; }
+            .footer-strip { flex-direction: column; align-items: center; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background layers -->
+    <div class="bg-grid"></div>
+    <div class="bg-glow"></div>
+    <div class="bg-edge"></div>
+
+    <!-- ── NAVIGATION ── -->
+    <nav>
+        <a href="index.html" class="nav-logo">William Allen <span>Company</span></a>
+        <ul class="nav-links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="technical-resources.html" class="active">Technical Resources</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="rfq-form.html" class="nav-cta">Request a Quote</a></li>
+        </ul>
+    </nav>
+
+    <!-- ── MAIN CONTENT ── -->
+    <div class="main">
+        <div class="content">
+
+            <!-- Icon -->
+            <div class="icon-wrap">
+                <svg viewBox="0 0 24 24">
+                    <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                </svg>
+            </div>
+
+            <!-- Eyebrow -->
+            <div class="eyebrow">Coming Soon</div>
+
+            <!-- Heading -->
+            <h1>Technical <span class="accent">Resources</span></h1>
+
+            <!-- Description -->
+            <p class="desc">We're building something useful. Our Technical Resources section is currently under development and will be available soon — check back for spec sheets, fastener guides, material references, and industry resources.</p>
+
+            <!-- What's coming -->
+            <div class="preview">
+                <div class="preview-item">
+                    <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                    <span>Spec Sheets</span>
+                </div>
+                <div class="preview-item">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+                    <span>Fastener Guides</span>
+                </div>
+                <div class="preview-item">
+                    <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                    <span>Material References</span>
+                </div>
+                <div class="preview-item">
+                    <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                    <span>Industry Standards</span>
+                </div>
+                <div class="preview-item">
+                    <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                    <span>Size Charts</span>
+                </div>
+                <div class="preview-item">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    <span>FAQs</span>
+                </div>
+            </div>
+
+            <!-- Action buttons -->
+            <div class="actions">
+                <a href="index.html" class="btn-home">
+                    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+                    Back to Homepage
+                </a>
+            </div>
+
+            <!-- Contact nudge -->
+            <p class="contact-nudge">
+                Questions in the meantime? Reach us at
+                <a href="mailto:Info@williamallencompany.com">Info@williamallencompany.com</a>
+                or <a href="tel:3037946301">303-794-6301</a>
+            </p>
+
+        </div>
+    </div>
+
+    <!-- ── FOOTER STRIP ── -->
+    <div class="footer-strip">
+        <div class="footer-strip-social">
+            <a href="#" class="social-btn" aria-label="Facebook">
+                <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="X / Twitter">
+                <svg viewBox="0 0 24 24"><path d="M4 4l16 16M4 20L20 4"/></svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="Instagram">
+                <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+        </div>
+        <p>&copy; William Allen Company  &nbsp;&middot;&nbsp; Denver, CO  &nbsp;&middot;&nbsp;  &copy; Copyright 2026. All Rights Reserved</p>
+    </div>
+</body>
+</html>

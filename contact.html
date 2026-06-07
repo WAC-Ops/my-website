@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us — William Allen Company</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy:    #0b1e40;
+            --gold:    #ED862D;
+            --sky:     #5dadec;
+            --slate:   #e8eef6;
+            --ivory:   #f6efe6;
+            --charcoal:#4a4a4a;
+            --white:   #ffffff;
+            --bg:      #f2f4f8;
+            --border:  #dde2ea;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'DM Sans', system-ui, sans-serif; color: var(--charcoal); background: var(--white); overflow-x: hidden; }
+
+        /* ── NAV ── */
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(11,30,64,0.97); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(255,200,69,0.15); padding: 0 2rem; height: 64px; display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--white); text-decoration: none; letter-spacing: 0.3px; }
+        .nav-logo span { color: var(--gold); }
+        .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+        .nav-links a { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.75); text-decoration: none; letter-spacing: 0.3px; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--gold); }
+        .nav-links a.active { color: var(--gold); }
+        .nav-cta { background: var(--gold) !important; color: var(--navy) !important; padding: 8px 20px; border-radius: 8px; font-weight: 600 !important; transition: background 0.2s, transform 0.15s !important; }
+        .nav-cta:hover { background: #e6b43c !important; transform: translateY(-1px); }
+
+        /* ── PAGE HERO ── */
+        .page-hero { background: var(--navy); padding: 7rem 2rem 4rem; text-align: center; position: relative; overflow: hidden; }
+        .page-hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 60px 60px; }
+        .page-hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(to right, transparent, var(--gold), transparent); }
+        .page-hero-inner { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; animation: fadeUp 0.6s ease both; }
+        .page-hero .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .page-hero .eyebrow::before, .page-hero .eyebrow::after { content: ''; display: block; width: 24px; height: 2px; background: var(--gold); border-radius: 1px; }
+        .page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(36px, 5vw, 54px); font-weight: 800; color: var(--white); line-height: 1.1; margin-bottom: 1.25rem; }
+        .page-hero h1 .accent { color: var(--gold); }
+        .page-hero p { font-size: 16px; font-weight: 300; color: rgba(255,255,255,0.6); line-height: 1.75; }
+
+        /* ── MAIN SECTION ── */
+        .contact-section { padding: 5rem 2rem 6rem; background: var(--bg); }
+        .section-inner { max-width: 1100px; margin: 0 auto; }
+
+        /* ── TWO COLUMN WRAP ── */
+        .contact-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1.6fr;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 0.5px solid var(--border);
+            box-shadow: 0 12px 48px rgba(11,30,64,0.1);
+        }
+
+        /* ── LEFT: Navy sidebar ── */
+        .contact-left {
+            background: var(--navy);
+            padding: 2.5rem 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .left-section-title {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            margin-bottom: 1.5rem;
+        }
+
+        .ci-icon {
+            width: 38px;
+            height: 38px;
+            background: rgba(255,200,69,0.12);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .ci-icon svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--gold);
+            fill: none;
+            stroke-width: 1.75;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .ci-label {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 4px;
+        }
+
+        .ci-value {
+            font-size: 14px;
+            color: rgba(255,255,255,0.88);
+            line-height: 1.5;
+            text-decoration: none;
+            display: block;
+            transition: color 0.2s;
+        }
+
+        a.ci-value:hover { color: var(--gold); }
+
+        .ci-sub {
+            font-size: 11px;
+            color: rgba(255,255,255,0.35);
+            margin-top: 3px;
+        }
+
+        .left-divider {
+            height: 1px;
+            background: rgba(255,255,255,0.08);
+            margin: 0.75rem 0 1.5rem;
+        }
+
+        /* Social links */
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.625rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 12px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.05);
+            border: 0.5px solid rgba(255,255,255,0.08);
+            text-decoration: none;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .social-link:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.15);
+        }
+
+        .sl-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .sl-icon.fb { background: #1877f2; }
+        .sl-icon.tw { background: #000000; }
+        .sl-icon.ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+
+        .sl-icon svg {
+            width: 15px;
+            height: 15px;
+            stroke: #fff;
+            fill: none;
+            stroke-width: 1.75;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .sl-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: rgba(255,255,255,0.85);
+        }
+
+        .sl-handle {
+            font-size: 11px;
+            color: rgba(255,255,255,0.35);
+            margin-top: 1px;
+        }
+
+        /* ── RIGHT: White content panel ── */
+        .contact-right {
+            background: var(--white);
+            padding: 2.5rem 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .right-section {}
+
+        .right-section-title {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--sky);
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2.5px solid var(--gold);
+        }
+
+        /* Hours table */
+        .hours-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .hours-table tr {
+            border-bottom: 0.5px solid var(--border);
+        }
+
+        .hours-table tr:last-child { border-bottom: none; }
+
+        .hours-table td {
+            padding: 9px 0;
+            font-size: 14px;
+        }
+
+        .hours-table td:first-child { color: var(--charcoal); }
+        .hours-table td:last-child { text-align: right; font-weight: 500; color: var(--navy); }
+        .hours-table tr.closed td:last-child { color: rgba(200, 60, 60, 0.8); }
+
+        /* Location */
+        .loc-desc {
+            font-size: 14px;
+            font-weight: 300;
+            color: var(--charcoal);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .loc-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--navy);
+            color: var(--white);
+            font-size: 13px;
+            font-weight: 500;
+            padding: 7px 16px;
+            border-radius: 20px;
+        }
+
+        .loc-badge svg {
+            width: 13px;
+            height: 13px;
+            stroke: var(--gold);
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* RFQ Prompt */
+        .rfq-prompt {
+            background: var(--bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border-left: 3px solid var(--gold);
+        }
+
+        .rfq-prompt p {
+            font-size: 14px;
+            font-weight: 300;
+            color: var(--charcoal);
+            line-height: 1.75;
+            margin-bottom: 1.25rem;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--navy);
+            color: var(--white);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 12px 24px;
+            border-radius: 10px;
+            text-decoration: none;
+            border: 3px solid var(--gold);
+            cursor: pointer;
+            transition: background 0.2s, transform 0.15s;
+        }
+
+        .btn-primary:hover { background: #162e5c; transform: translateY(-2px); }
+
+        .btn-primary svg {
+            width: 16px;
+            height: 16px;
+            stroke: var(--gold);
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* ── FOOTER ── */
+        footer { color: var(--white); }
+        .footer-upper { background: var(--navy); }
+        .footer-lower { background: #060d1c; }
+        .footer-inner { max-width: 1100px; margin: 0 auto; }
+        .footer-row1 { display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; padding: 3rem 2rem 2rem; }
+        .footer-brand-name { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
+        .footer-gold-bar { width: 28px; height: 2px; background: var(--gold); border-radius: 1px; margin: 0.625rem 0 0.875rem; }
+        .footer-brand-desc { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.5); line-height: 1.75; max-width: 340px; }
+        .footer-col-title { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+        .footer-contact-item { display: flex; align-items: center; gap: 10px; margin-bottom: 0.75rem; font-size: 13px; color: rgba(255,255,255,0.65); text-decoration: none; transition: color 0.2s; }
+        .footer-contact-item:hover { color: var(--white); }
+        .footer-contact-item svg { width: 16px; height: 16px; stroke: var(--sky); fill: none; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+        .footer-hours { display: flex; flex-direction: column; gap: 0.4rem; margin-top: 0.25rem; }
+        .footer-hours-row { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+        .footer-hours-day { font-size: 12px; color: rgba(255,255,255,0.55); }
+        .footer-hours-time { font-size: 12px; color: rgba(255,255,255,0.8); font-weight: 500; }
+        .footer-hours-closed { font-size: 12px; color: rgba(255,100,100,0.75); font-weight: 500; }
+        .footer-divider { height: 1px; background: rgba(255,255,255,0.08); margin: 0 2rem; }
+        .footer-divider-bot { height: 1px; background: rgba(255,255,255,0.06); }
+        .footer-row2 { padding: 1.25rem 2rem; display: flex; flex-direction: column; gap: 0.75rem; }
+        .footer-pay-label { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+        .footer-pay-icons { display: flex; align-items: center; gap: 0.625rem; flex-wrap: wrap; }
+        .footer-pay-icons img { height: 32px; width: auto; border-radius: 6px; display: block; }
+        .pay-badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 6px; font-size: 11px; font-weight: 500; background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.8); height: 32px; }
+        .pay-badge svg { width: 14px; height: 14px; stroke: rgba(255,255,255,0.6); fill: none; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+        .footer-row3 { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; flex-wrap: wrap; gap: 0.75rem; }
+        .footer-social { display: flex; gap: 0.5rem; }
+        .social-btn { width: 34px; height: 34px; border-radius: 8px; background: rgba(255,255,255,0.07); display: flex; align-items: center; justify-content: center; text-decoration: none; transition: background 0.2s; }
+        .social-btn:hover { background: rgba(255,255,255,0.14); }
+        .social-btn svg { width: 17px; height: 17px; stroke: rgba(255,255,255,0.7); fill: none; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+        .footer-copy { font-size: 11px; color: rgba(255,255,255,0.3); }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
+            .contact-wrap { grid-template-columns: 1fr; }
+            .footer-row1 { grid-template-columns: 1fr; gap: 2.5rem; }
+            .footer-row3 { flex-direction: column; align-items: flex-start; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ── NAVIGATION ── -->
+    <nav>
+        <a href="index.html" class="nav-logo">William Allen <span>Company</span></a>
+        <ul class="nav-links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="technical-resources.html">Technical Resources</a></li>
+            <li><a href="contact.html" class="active">Contact Us</a></li>
+            <li><a href="rfq-form.html" class="nav-cta">Request a Quote</a></li>
+        </ul>
+    </nav>
+
+    <!-- ── PAGE HERO ── -->
+    <div class="page-hero">
+        <div class="page-hero-inner">
+            <div class="eyebrow">Get in Touch</div>
+            <h1>We're Here to <span class="accent">Help</span></h1>
+            <p>Have a question about a part, a quote, or one of our programs?<br>Reach out and we will get back to you promptly.</p>
+        </div>
+    </div>
+
+
+    <!-- ── CONTACT SECTION ── -->
+    <section class="contact-section">
+        <div class="section-inner">
+            <div class="contact-wrap">
+
+                <!-- LEFT: Navy sidebar -->
+                <div class="contact-left">
+                    <div class="left-section-title">Contact Information</div>
+
+                    <!-- Email -->
+                    <div class="contact-item">
+                        <div class="ci-icon">
+                            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        </div>
+                        <div>
+                            <div class="ci-label">Email</div>
+                            <a href="mailto:Info@williamallencompany.com" class="ci-value">Info@williamallencompany.com</a>
+                            <div style="height: 5px;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Phone -->
+                    <div class="contact-item">
+                        <div class="ci-icon">
+                            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.46 2 2 0 0 1 3.57 1.25h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.73a16 16 0 0 0 6 6l.81-.81a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        </div>
+                        <div>
+                            <div class="ci-label">Phone</div>
+                            <a href="tel:3037946301" class="ci-value">303-794-6301</a>
+                           <div style="height: 5px;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Location -->
+                    <div class="contact-item">
+                        <div class="ci-icon">
+                            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        </div>
+                        <div>
+                            <div class="ci-label">Location</div>
+                            <div class="ci-value">Denver, Colorado</div>
+                            <div style="height: 5px;"></div>
+                        </div>
+                    </div>
+
+                    <div class="left-divider"></div>
+
+                    <!-- Social Media -->
+                    <div class="left-section-title">Follow Us</div>
+                    <div class="social-links">
+                        <!-- Replace href="#" with your real Facebook URL -->
+                        <a href="#" class="social-link" aria-label="Facebook">
+                            <div class="sl-icon fb">
+                                <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                            </div>
+                            <div>
+                                <div class="sl-name">Facebook</div>
+                                <!-- Replace with your real handle -->
+                                <div class="sl-handle">@WilliamAllenCompany</div>
+                            </div>
+                        </a>
+                        <!-- Replace href="#" with your real X/Twitter URL -->
+                        <a href="#" class="social-link" aria-label="X / Twitter">
+                            <div class="sl-icon tw">
+                                <svg viewBox="0 0 24 24"><path d="M4 4l16 16M4 20L20 4"/></svg>
+                            </div>
+                            <div>
+                                <div class="sl-name">X (Twitter)</div>
+                                <!-- Replace with your real handle -->
+                                <div class="sl-handle">@WilliamAllenCo</div>
+                            </div>
+                        </a>
+                        <!-- Replace href="#" with your real Instagram URL -->
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <div class="sl-icon ig">
+                                <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                            </div>
+                            <div>
+                                <div class="sl-name">Instagram</div>
+                                <!-- Replace with your real handle -->
+                                <div class="sl-handle">@WilliamAllenCompany</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- RIGHT: White content panel -->
+                <div class="contact-right">
+
+                    <!-- Hours of Operation -->
+                    <div class="right-section">
+                        <div class="right-section-title">Hours of Operation</div>
+                        <table class="hours-table">
+                            <tr>
+                                <td>Monday – Friday</td>
+                                <td>8:00am – 5:00pm</td>
+                            </tr>
+                            <tr class="closed">
+                                <td>Saturday</td>
+                                <td>Closed</td>
+                            </tr>
+                            <tr class="closed">
+                                <td>Sunday</td>
+                                <td>Closed</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!-- Location -->
+                    <div class="right-section">
+                        <div class="right-section-title">Our Location</div>
+                        <p class="loc-desc">Based in Denver, Colorado, we serve manufacturers, contractors, and industrial businesses locally and nationwide. Contact us for shipping options and lead times to your location.</p>
+                        <div class="loc-badge">
+                            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            Denver, CO
+                        </div>
+                    </div>
+
+                    <!-- RFQ Prompt -->
+                    <div class="right-section">
+                        <div class="right-section-title">Need a Parts Quote?</div>
+                        <div class="rfq-prompt">
+                            <p>Use our Request for Quote form to submit your part specifications and we'll get back to you with detailed pricing within 1–2 business days.</p>
+                            <a href="rfq-form.html" class="btn-primary">
+                                <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                Request a Quote
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── FOOTER ── -->
+    <footer>
+
+        <!-- Upper: navy background — info + payment rows -->
+        <div class="footer-upper">
+            <div class="footer-inner">
+
+                <!-- Row 1: Brand + Communication -->
+                <div class="footer-row1">
+                    <div>
+                        <div class="footer-brand-name">William Allen Company</div>
+                        <div class="footer-gold-bar"></div>
+                        <div class="footer-brand-desc">Fourth-generation American-owned and operated, our company is built on a strong family foundation. We carry the values of trust, integrity, and dedication that have been passed down through generations.</div>
+                    </div>
+                    <div>
+                        <div class="footer-col-title">Communication</div>
+                        <a href="mailto:Info@williamallencompany.com" class="footer-contact-item">
+                            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                            Info@williamallencompany.com
+                        </a>
+                        <a href="tel:3037946301" class="footer-contact-item">
+                            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.46 2 2 0 0 1 3.57 1.25h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.73a16 16 0 0 0 6 6l.81-.81a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            303-794-6301
+                        </a>
+
+                        <!-- Hours of Operation -->
+                        <div style="margin-top: 1.25rem;">
+                            <div class="footer-col-title">Hours of Operation</div>
+                            <div class="footer-hours">
+                                <div class="footer-hours-row">
+                                    <span class="footer-hours-day">Mon – Fri</span>
+                                    <span class="footer-hours-time">8:00am – 5:00pm</span>
+                                </div>
+                                <div class="footer-hours-row">
+                                    <span class="footer-hours-day">Sat – Sun</span>
+                                    <span class="footer-hours-closed">Closed</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-divider"></div>
+
+                <!-- Row 2: Payment methods -->
+                <div class="footer-row2">
+                    <div class="footer-pay-label">We Accept</div>
+                    <div class="footer-pay-icons">
+                        <img src="https://cdn.jsdelivr.net/gh/aaronfagan/svg-credit-card-payment-icons@main/flat-rounded/visa.svg" alt="Visa">
+                        <img src="https://cdn.jsdelivr.net/gh/aaronfagan/svg-credit-card-payment-icons@main/flat-rounded/mastercard.svg" alt="Mastercard">
+                        <img src="https://cdn.jsdelivr.net/gh/aaronfagan/svg-credit-card-payment-icons@main/flat-rounded/amex.svg" alt="American Express">
+                        <img src="https://cdn.jsdelivr.net/gh/aaronfagan/svg-credit-card-payment-icons@main/flat-rounded/discover.svg" alt="Discover">
+                        <span class="pay-badge">
+                            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                            Check
+                        </span>
+                        <span class="pay-badge">
+                            <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                            Direct Deposit
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Lower: darker background — social + copyright -->
+        <div class="footer-lower">
+            <div class="footer-divider-bot"></div>
+            <div class="footer-row3">
+                <div class="footer-social">
+                    <a href="#" class="social-btn" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    </a>
+                    <a href="#" class="social-btn" aria-label="X / Twitter">
+                        <svg viewBox="0 0 24 24"><path d="M4 4l16 16M4 20L20 4"/></svg>
+                    </a>
+                    <a href="#" class="social-btn" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                    </a>
+                </div>
+                <div class="footer-copy"> William Allen Company  &nbsp;&middot;&nbsp; Denver, CO  &nbsp;&middot;&nbsp;  &copy; Copyright 2026. All Rights Reserved</div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
